@@ -9,7 +9,7 @@ import (
 
 func main() {
 	args := os.Args
-	if len(args) > 1 {
+	if len(args) >= 3 {
 		// args[0]外部命令行调用时的此进程文件名
 		execType, _ := strconv.ParseInt(args[1], 10, 32)
 		if execType == common.Watermark {
@@ -19,5 +19,11 @@ func main() {
 		} else if execType == common.Convert {
 			src.InitConvertInput(args[2])
 		}
+		return
 	}
+	println("please pass args!")
+	// 非成功退出
+	os.Exit(2)
+	//_, _ = fmt.Scanln()
+
 }

@@ -13,7 +13,7 @@ func InitWatermarkInput(jsonWaterInputData string) {
 	var waterInputParams watermark.WaterInputParams
 	err := json.Unmarshal([]byte(jsonWaterInputData), &waterInputParams)
 	if err != nil {
-		panic(err)
+		panic(err.Error())
 	}
 	watermark.Run(waterInputParams)
 }
