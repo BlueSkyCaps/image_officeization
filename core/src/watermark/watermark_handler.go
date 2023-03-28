@@ -10,7 +10,6 @@ import (
 	"image_officeization/core/src/common"
 	"io/ioutil"
 	"log"
-	"strconv"
 	"strings"
 )
 
@@ -31,10 +30,7 @@ func addText(params WaterInputParams) {
 		textWidthMax, texts := advanceTextWidth(fontObj, params.TextWaterInputParams)
 		drawTextContextSet(fontObj, textWidthMax, texts, dst, params)
 		// 将带有水印的图片输出到本地
-		err := imaging.Save(dst, params.OutDir+"/out_watermark_"+strconv.Itoa(i)+".jpg")
-		if err != nil {
-			return
-		}
+		common.SaveImgFile(params.Paths[i], params.OutDir, dst)
 	}
 }
 
@@ -79,7 +75,12 @@ func drawTextContextSet(fontObj *truetype.Font, textWidthMax int, texts []string
 	// 设置需要去绘制的目标图片，就是原图片
 	c.SetDst(dst)
 	// 设置要去绘制的图片颜色，因为要绘制文字，这就是文字的颜色
-	c.SetSrc(image.NewUniform(color.RGBA{R: 255, G: 255, B: 255, A: 255}))
+	c.SetSrc(image.NewUniform(color.RGBA{
+		R: params.TextWaterInputParams.RGBA.R,
+		G: params.TextWaterInputParams.RGBA.G,
+		B: params.TextWaterInputParams.RGBA.B,
+		A: params.TextWaterInputParams.RGBA.A,
+	}))
 	// 开始根据字体大小的增量来绘制当前行的文本
 	var currentAddY int
 	for i := 0; i < len(texts); i++ {
@@ -93,7 +94,7 @@ func drawTextHandler(dst *image.NRGBA, textWidth int, c *freetype.Context, param
 	var pt fixed.Point26_6
 	switch params.Anchor {
 	case common.Center:
-		pt = freetype.Pt(dst.Bounds().Max.X/2-textWidth/2+params.Offset.Y,
+		pt = freetype.Pt(dst.Bounds().Max.X/2-textWidth/2+params.Offset.X,
 			dst.Bounds().Max.Y/2-int(params.TextWaterInputParams.FontSize)+currentAddY+params.Offset.Y)
 
 	case common.TopLeft:
@@ -123,7 +124,7 @@ func drawTextHandler(dst *image.NRGBA, textWidth int, c *freetype.Context, param
 	default:
 		// 没有指定有效的Anchor，使用自定义位置
 		pt = freetype.Pt(params.Point.X+params.Offset.X,
-			params.Point.Y+params.Offset.Y)
+			params.Point.Y+currentAddY+int(params.TextWaterInputParams.FontSize)+params.Offset.Y)
 	}
 	// 绘在位置点制水印文字
 	_, err := c.DrawString(currentTextLine, pt)

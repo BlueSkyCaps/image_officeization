@@ -2,8 +2,8 @@ package resize
 
 import (
 	"github.com/disintegration/imaging"
+	"image_officeization/core/src/common"
 	"log"
-	"strconv"
 )
 
 func Run(params ResizeInputParams) {
@@ -17,9 +17,6 @@ func Run(params ResizeInputParams) {
 		// 创建一个新的图片，大小和原始图片一样
 		resImg := imaging.Resize(src, params.WH.X, params.WH.Y, imaging.Lanczos)
 		// 将缩放后的图片输出到本地
-		err = imaging.Save(resImg, params.OutDir+"/out_resize_"+strconv.Itoa(i)+".jpg")
-		if err != nil {
-			panic(err)
-		}
+		common.SaveImgFile(params.Paths[i], params.OutDir, resImg)
 	}
 }

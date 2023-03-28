@@ -38,8 +38,10 @@ type ImageFormatType int
 const (
 	PNG ImageFormatType = iota
 	JPEG
+	JPG
 	GIF
 	BMP
+	TIF
 )
 
-var ImgFormatName = []string{"png", "jpeg", "gif", "bmp"}
+var ImgFormatName = []string{"png", "jpeg", "jpg", "gif", "bmp", "tif"}

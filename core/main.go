@@ -18,12 +18,13 @@ func main() {
 			src.InitResizeInput(args[2])
 		} else if execType == common.Convert {
 			src.InitConvertInput(args[2])
+		} else {
+			os.Exit(-4)
 		}
-		return
+		os.Exit(0)
 	}
 	println("please pass args!")
 	// 非成功退出
 	os.Exit(2)
 	//_, _ = fmt.Scanln()
-
 }

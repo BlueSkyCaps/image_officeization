@@ -2,6 +2,7 @@ package watermark
 
 import (
 	"image"
+	"image/color"
 	"image_officeization/core/src/common"
 )
 
@@ -29,6 +30,8 @@ type TextWaterInputParams struct {
 	FontPath string
 	// 字体大小
 	FontSize float64
+	// RGBA颜色与透明度
+	RGBA color.RGBA
 	// 文字水印值
 	Text string
 }
