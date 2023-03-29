@@ -42,6 +42,8 @@ const (
 	GIF
 	BMP
 	TIF
+	// WEBP 此格式只支持转换操作
+	WEBP
 )
 
-var ImgFormatName = []string{"png", "jpeg", "jpg", "gif", "bmp", "tif"}
+var ImgFormatName = []string{"png", "jpeg", "jpg", "gif", "bmp", "tif", "webp"}

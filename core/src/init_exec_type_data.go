@@ -2,6 +2,7 @@ package src
 
 import (
 	"encoding/json"
+	"image_officeization/core/src/common"
 	"image_officeization/core/src/convert"
 	"image_officeization/core/src/resize"
 	"image_officeization/core/src/watermark"
@@ -15,7 +16,7 @@ func InitWatermarkInput(jsonWaterInputData string) {
 	err := json.Unmarshal([]byte(jsonWaterInputData), &waterInputParams)
 	if err != nil {
 		println(err.Error())
-		os.Exit(-3)
+		os.Exit(common.ExitJsonUnmarshal)
 	}
 	watermark.Run(waterInputParams)
 }
@@ -27,7 +28,7 @@ func InitResizeInput(jsonResizeInputData string) {
 	err := json.Unmarshal([]byte(jsonResizeInputData), &resizeInputParams)
 	if err != nil {
 		println(err.Error())
-		os.Exit(-3)
+		os.Exit(common.ExitJsonUnmarshal)
 	}
 	resize.Run(resizeInputParams)
 }
@@ -39,7 +40,7 @@ func InitConvertInput(jsonConvertInputData string) {
 	err := json.Unmarshal([]byte(jsonConvertInputData), &convertInputParams)
 	if err != nil {
 		println(err.Error())
-		os.Exit(-3)
+		os.Exit(common.ExitJsonUnmarshal)
 	}
 	convert.Run(convertInputParams)
 }

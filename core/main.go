@@ -19,12 +19,12 @@ func main() {
 		} else if execType == common.Convert {
 			src.InitConvertInput(args[2])
 		} else {
-			os.Exit(-4)
+			os.Exit(common.ExitExecTypeNotMatch)
 		}
-		os.Exit(0)
+		os.Exit(common.ExitSuccess)
 	}
 	println("please pass args!")
 	// 非成功退出
-	os.Exit(2)
+	os.Exit(common.ExitExecTypeNotMatch)
 	//_, _ = fmt.Scanln()
 }
