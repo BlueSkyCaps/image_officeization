@@ -1,12 +1,13 @@
-package resize
+package compress
 
 import (
 	"github.com/disintegration/imaging"
 	"image_officeization/core/src/common"
 	"os"
+	"time"
 )
 
-func Run(params ResizeInputParams) {
+func Run(params CompressInputParams) {
 	for i := 0; i < len(params.Paths); i++ {
 		// 打开原始图片
 		src, err := imaging.Open(params.Paths[i])
@@ -14,9 +15,8 @@ func Run(params ResizeInputParams) {
 			println("Failed to open image: " + err.Error())
 			os.Exit(common.ExitFileOp)
 		}
-		// 创建一个新的图片，大小和原始图片一样
-		resImg := imaging.Resize(src, params.WH.X, params.WH.Y, imaging.Lanczos)
-		// 将缩放后的图片输出到本地
-		common.SaveImgFile(params.Paths[i], params.OutDir, resImg)
+		// 根据压缩质量将图片输出到本地
+		common.SaveImgFileByCompress(params.Paths[i], params.OutDir, src, params.ImgCompressQuality)
+		time.Sleep(1000 * time.Millisecond)
 	}
 }

@@ -18,6 +18,8 @@ func main() {
 			src.InitResizeInput(args[2])
 		} else if execType == common.Convert {
 			src.InitConvertInput(args[2])
+		} else if execType == common.Compress {
+			src.InitCompressInput(args[2])
 		} else {
 			os.Exit(common.ExitExecTypeNotMatch)
 		}

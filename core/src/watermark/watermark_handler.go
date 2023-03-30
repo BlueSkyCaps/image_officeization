@@ -9,7 +9,7 @@ import (
 	"image/color"
 	"image_officeization/core/src/common"
 	"io/ioutil"
-	"log"
+	"os"
 	"strings"
 )
 
@@ -150,7 +150,8 @@ func DstNew(srcImgPath string) *image.NRGBA {
 	// 打开原始图片
 	src, err := imaging.Open(srcImgPath)
 	if err != nil {
-		log.Fatalf("Failed to open image: %v", err)
+		println("Failed to open image: " + err.Error())
+		os.Exit(common.ExitFileOp)
 	}
 	// 创建一个新的图片，大小和原始图片一样
 	dst := imaging.New(src.Bounds().Max.X, src.Bounds().Max.Y, color.NRGBA{})

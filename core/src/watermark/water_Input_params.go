@@ -1,3 +1,14 @@
+/*
+Package watermark 图片添加水印。
+采用Imaging库封装大量代码去判断图片格式,包括encode和decode操作。
+采用freetype库进行文本水印绘制和字体设置。
+源图片支持jpeg/jpg png gif bmp tif，但不支持webp格式（通过webp库多次转码将耗时，且是没必要的，可通过convert单元转换格式）。
+支持根据Anchor(common.PictureAnchor)锚点来绘制水印位置，也可通过image.Point自定义坐标点，但优先使用Anchor。
+目前支持文字水印类型，绘制图片水印不保证后续会添加。
+RGBA设置颜色，A为透明度。
+字体需要指定，系统已安装的字体绝对路径位置，windows通常为：c:/windows/font/xxx.tif
+也可以修改源码，尝试通过Golang获取有效的字体路径，并指定给WaterInputParams.TextWaterInputParams.FontPath
+*/
 package watermark
 
 import (

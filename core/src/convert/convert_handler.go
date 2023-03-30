@@ -44,7 +44,7 @@ func runCurrent(params ConvertInputParams, i int) {
 		// 若目标图片是webp格式 another -> webp
 		encodeImgBuf = encodeWebPImg(dstNew)
 	}
-	common.SaveImgFileByFormat(params.Paths[i], params.OutDir, dstNew, formatName, params.ImageFormatType, encodeImgBuf)
+	common.SaveImgFileByTheFormat(params.Paths[i], params.OutDir, dstNew, formatName, params.ImageFormatType, encodeImgBuf)
 	//var a rune
 	//_, err := fmt.Scanln(&a)
 	//if err != nil {

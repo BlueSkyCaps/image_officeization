@@ -20,6 +20,8 @@ const (
 	Resize
 	// Convert 执行转换格式
 	Convert
+	// Compress 执行图片体积压缩
+	Compress
 )
 
 // WatermarkType 添加水印的类型，图片水印还是文字水印
@@ -47,3 +49,15 @@ const (
 )
 
 var ImgFormatName = []string{"png", "jpeg", "jpg", "gif", "bmp", "tif", "webp"}
+
+// ImgCompressQuality 图片压缩质量
+type ImgCompressQuality int
+
+const (
+	High ImgCompressQuality = iota
+	Middle
+	Low
+)
+
+// ImgCompressJPEGValues ImgCompressValues JPEG图片压缩质量数值，越前的图片质量越清晰
+var ImgCompressJPEGValues = []int{85, 60, 20}
