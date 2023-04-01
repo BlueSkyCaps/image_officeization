@@ -15,6 +15,10 @@ func main() {
 		execType, _ := strconv.ParseInt(args[1], 10, 32)
 		// 调用方程序把空格替换成"?"以便命令行参数能够有效传递而不会被截断，此处将其复原回来
 		decodeString := strings.ReplaceAll(args[2], "?", " ")
+		//err := os.WriteFile("C:\\Users\\BlueSkyCarry\\Desktop\\aa.txt", []byte(decodeString), fs.ModePerm)
+		//if err != nil {
+		//	return
+		//}
 		if execType == common.Watermark {
 			src.InitWatermarkInput(decodeString)
 		} else if execType == common.Resize {
