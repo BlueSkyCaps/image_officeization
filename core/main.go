@@ -5,6 +5,7 @@ import (
 	"image_officeization/core/src/common"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -12,14 +13,16 @@ func main() {
 	if len(args) >= 3 {
 		// args[0]外部命令行调用时的此进程文件名
 		execType, _ := strconv.ParseInt(args[1], 10, 32)
+		// 调用方程序把空格替换成"?"以便命令行参数能够有效传递而不会被截断，此处将其复原回来
+		decodeString := strings.ReplaceAll(args[2], "?", " ")
 		if execType == common.Watermark {
-			src.InitWatermarkInput(args[2])
+			src.InitWatermarkInput(decodeString)
 		} else if execType == common.Resize {
-			src.InitResizeInput(args[2])
+			src.InitResizeInput(decodeString)
 		} else if execType == common.Convert {
-			src.InitConvertInput(args[2])
+			src.InitConvertInput(decodeString)
 		} else if execType == common.Compress {
-			src.InitCompressInput(args[2])
+			src.InitCompressInput(decodeString)
 		} else {
 			os.Exit(common.ExitExecTypeNotMatch)
 		}
