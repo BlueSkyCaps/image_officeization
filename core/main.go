@@ -3,12 +3,15 @@ package main
 import (
 	"image_officeization/core/src"
 	"image_officeization/core/src/common"
+	"image_officeization/core/test"
 	"os"
 	"strconv"
 	"strings"
 )
 
 func main() {
+	test.GifAllTest()
+	return
 	args := os.Args
 	if len(args) >= 3 {
 		// args[0]外部命令行调用时的此进程文件名
